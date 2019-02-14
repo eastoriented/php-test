@@ -1,0 +1,29 @@
+{
+	"name": "eastoriented/php-test",
+	"description": "A PHP library which define `if` as object",
+	"type": "library",
+	"license": "BSD-2-Clause",
+	"authors": [
+		{
+			"name": "Frédéric Hardy",
+			"email": "frederic.hardy@mageekbox.net"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"eastoriented\\php\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"eastoriented\\php\\tests\\units\\": "tests/units/src"
+		}
+	},
+	"require": {
+		"eastoriented/php-block": "dev-master"
+	},
+	"require-dev": {
+		"eastoriented/library": "dev-master",
+		"atoum/atoum": "^3"
+	}
+}
