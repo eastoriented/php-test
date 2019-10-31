@@ -1,6 +1,6 @@
 <?php namespace eastoriented\php\test\variable;
 
-use eastoriented\php\test;
+use eastoriented\php\{ test, block };
 
 class any
 	implements
@@ -25,5 +25,12 @@ class any
 				$recipient
 			)
 		;
+	}
+
+	function blockForTrueTestIs(block $block) :void
+	{
+		$this->recipientOfTestIs(
+			new test\recipient\ifTrue($block)
+		);
 	}
 }

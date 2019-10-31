@@ -3,6 +3,7 @@
 require __DIR__ . '/../../../../../runner.php';
 
 use eastoriented\tests\units;
+use mock\eastoriented\php\block as mockOfBlock;
 use mock\eastoriented\php\test\recipient as mockOfRecipient;
 
 class contains extends units\test
@@ -85,6 +86,80 @@ class contains extends units\test
 				->mock($recipient)
 					->receive('booleanIs')
 						->withArguments(true)
+							->thrice
+		;
+	}
+
+	function testBlockForTrueTestIs()
+	{
+		$this
+			->given(
+				$this->newTestedInstance(
+					'foo',
+					'a'
+				),
+				$block = new mockOfBlock
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance('foo', 'a'))
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->never
+
+			->given(
+				$this->newTestedInstance(
+					'foo',
+					'f'
+				)
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance('foo', 'f'))
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->withArguments()
+							->once
+
+			->given(
+				$this->newTestedInstance(
+					'foo',
+					'o'
+				)
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance('foo', 'o'))
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->withArguments()
+							->twice
+
+			->given(
+				$this->newTestedInstance(
+					'foo',
+					'x',
+					'f'
+				)
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance('foo', 'x', 'f'))
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->withArguments()
 							->thrice
 		;
 	}

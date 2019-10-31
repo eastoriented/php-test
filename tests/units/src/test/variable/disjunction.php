@@ -4,6 +4,7 @@ require __DIR__ . '/../../../runner.php';
 
 use eastoriented\tests\units;
 use mock\eastoriented\php\test\variable as mockOfVariableTest;
+use mock\eastoriented\php\block as mockOfBlock;
 use mock\eastoriented\php\test\recipient as mockOfRecipient;
 
 class disjunction extends units\test
@@ -106,6 +107,79 @@ class disjunction extends units\test
 				->mock($otherTest)
 					->receive('recipientOfTestIs')
 						->thrice
+		;
+	}
+
+	function testIfTrueExecuteBlock()
+	{
+		$this
+			->given(
+				$this->newTestedInstance(
+					$test = new mockOfVariableTest,
+					$otherTest = new mockOfVariableTest
+				),
+				$block = new mockOfBlock
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($test, $otherTest))
+				->mock($test)
+					->receive('blockForTrueTestIs')
+						->once
+				->mock($otherTest)
+					->receive('blockForTrueTestIs')
+						->once
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->never
+
+			->given(
+				$this->calling($test)->blockForTrueTestIs = function($aBlock) {
+					$aBlock->blockArgumentsAre();
+				}
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($test, $otherTest))
+				->mock($test)
+					->receive('blockForTrueTestIs')
+						->twice
+				->mock($otherTest)
+					->receive('blockForTrueTestIs')
+						->once
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->once
+
+			->given(
+				$this->calling($test)->blockForTrueTestIs = function($aBlock) {
+				},
+				$this->calling($otherTest)->blockForTrueTestIs = function($aBlock) {
+					$aBlock->blockArgumentsAre();
+				}
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($test, $otherTest))
+				->mock($test)
+					->receive('blockForTrueTestIs')
+						->thrice
+
+				->mock($otherTest)
+					->receive('blockForTrueTestIs')
+						->twice
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->twice
 		;
 	}
 }

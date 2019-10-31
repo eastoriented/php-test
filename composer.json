@@ -3,6 +3,7 @@
 	"description": "A PHP library which define `if` as object",
 	"type": "library",
 	"license": "BSD-2-Clause",
+	"minimum-stability": "dev",
 	"authors": [
 		{
 			"name": "Frédéric Hardy",
@@ -20,7 +21,8 @@
 		}
 	},
 	"require": {
-		"eastoriented/php-block": "dev-master"
+		"eastoriented/php-block": "dev-master",
+		"eastoriented/php-container": "dev-master"
 	},
 	"require-dev": {
 		"eastoriented/library": "dev-master",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fda68fb22d751d282fe43308d7e412d",
+    "content-hash": "b33b221097bc1e568091d18b5045bf0c",
     "packages": [
         {
             "name": "eastoriented/php-block",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/eastoriented/php-block.git",
-                "reference": "1a1b7459c7dfef3eb4bf56032f7f3864edaf1d09"
+                "reference": "f5ca7fbfc4d233f4bd4eaf484cbfe5d2be6bd5f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eastoriented/php-block/zipball/1a1b7459c7dfef3eb4bf56032f7f3864edaf1d09",
-                "reference": "1a1b7459c7dfef3eb4bf56032f7f3864edaf1d09",
+                "url": "https://api.github.com/repos/eastoriented/php-block/zipball/f5ca7fbfc4d233f4bd4eaf484cbfe5d2be6bd5f6",
+                "reference": "f5ca7fbfc4d233f4bd4eaf484cbfe5d2be6bd5f6",
                 "shasum": ""
             },
             "require-dev": {
@@ -41,22 +41,62 @@
                 }
             ],
             "description": "A PHP library to emulate Smalltalk block",
-            "time": "2019-02-12T15:18:55+00:00"
+            "time": "2019-10-30T09:41:32+00:00"
+        },
+        {
+            "name": "eastoriented/php-container",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eastoriented/php-container.git",
+                "reference": "fae7ce9c10f0df6107494b87cb373313faf8a80b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eastoriented/php-container/zipball/fae7ce9c10f0df6107494b87cb373313faf8a80b",
+                "reference": "fae7ce9c10f0df6107494b87cb373313faf8a80b",
+                "shasum": ""
+            },
+            "require": {
+                "eastoriented/php-block": "dev-master"
+            },
+            "require-dev": {
+                "atoum/atoum": "^3",
+                "eastoriented/library": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "eastoriented\\php\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Frédéric Hardy",
+                    "email": "frederic.hardy@mageekbox.net"
+                }
+            ],
+            "description": "A PHP library to iterate over values in container",
+            "time": "2019-10-30T09:48:46+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "atoum/atoum",
-            "version": "3.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "c5279d0ecd4e2d53af6b38815db2cafee8fc46b6"
+                "reference": "b6c93433a7b0b92b54c2bb9b0731d71ddc03b365"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/c5279d0ecd4e2d53af6b38815db2cafee8fc46b6",
-                "reference": "c5279d0ecd4e2d53af6b38815db2cafee8fc46b6",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/b6c93433a7b0b92b54c2bb9b0731d71ddc03b365",
+                "reference": "b6c93433a7b0b92b54c2bb9b0731d71ddc03b365",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +104,7 @@
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "ext-xml": "*",
-                "php": "^5.6.0 || ^7.0.0 <7.4.0"
+                "php": "^5.6.0 || ^7.0.0 <7.5.0"
             },
             "replace": {
                 "mageekguy/atoum": "*"
@@ -126,7 +166,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2018-03-15T22:46:39+00:00"
+            "time": "2019-10-04T19:45:12+00:00"
         },
         {
             "name": "eastoriented/library",
@@ -134,12 +174,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/eastoriented/library.git",
-                "reference": "cb14e074cc9557cd627be4350cb70c9467b9934c"
+                "reference": "29a1c281c77c20c539e4df5707b8fd33ca81818f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eastoriented/library/zipball/cb14e074cc9557cd627be4350cb70c9467b9934c",
-                "reference": "cb14e074cc9557cd627be4350cb70c9467b9934c",
+                "url": "https://api.github.com/repos/eastoriented/library/zipball/29a1c281c77c20c539e4df5707b8fd33ca81818f",
+                "reference": "29a1c281c77c20c539e4df5707b8fd33ca81818f",
                 "shasum": ""
             },
             "bin": [
@@ -157,13 +197,14 @@
                 }
             ],
             "description": "A blueprint to setup a develoment environment for library with docker",
-            "time": "2019-02-10T15:52:45+00:00"
+            "time": "2019-10-04T10:24:14+00:00"
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "eastoriented/php-block": 20,
+        "eastoriented/php-container": 20,
         "eastoriented/library": 20
     },
     "prefer-stable": false,

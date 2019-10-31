@@ -1,5 +1,6 @@
 <?php namespace eastoriented\php\test\variable;
 
+use eastoriented\php\block;
 use eastoriented\php\test\{
 	variable as test,
 	recipient,
@@ -7,10 +8,7 @@ use eastoriented\php\test\{
 	variable\isTrue\strictly as isTrue,
 	recipient\ifTrue\functor as ifTrue
 };
-use eastoriented\php\container\iterator\{
-	fifo,
-	block\functor as block
-};
+use eastoriented\php\container\{ iterator, php };
 
 class disjunction
 	implements
@@ -27,48 +25,61 @@ class disjunction
 
 	function recipientOfTestIs(recipient $recipient) :void
 	{
-		(new fifo)
-			->variablesForIteratorBlockAre(
-				new block(
+		(
+			new test\container\any(
+				new iterator\fifo,
+				... $this->tests
+			)
+		)
+			->iteratorBlockIs(
+				new iterator\block\functor(
 					function($iterator, $test) use (& $boolean)
 					{
 						$test
 							->recipientOfTestIs(
-								new recipient\functor(
-									function($aBoolean) use ($iterator, & $boolean)
-									{
-										(
-											new isTrue($boolean = $aBoolean)
-										)
-											->recipientOfTestIs(
-												new ifTrue(
-													function() use ($iterator)
-													{
-														$iterator->nextIterationAreUseless();
-													}
-												)
-											)
-										;
-									}
+								new recipient\container\fifo(
+									new recipient\variable($boolean),
+									new recipient\ifTrue\iterator\breaker($iterator)
 								)
 							)
 						;
 					}
-				),
-				... $this->tests
+				)
 			)
 		;
 
 		(
 			new defined($boolean)
 		)
-			->recipientOfTestIs(
-				new ifTrue(
+			->blockForTrueTestIs(
+				new block\functor(
 					function() use ($boolean, $recipient)
 					{
 						$recipient->booleanIs($boolean);
 					}
 				)
+			)
+		;
+	}
+
+	function blockForTrueTestIs(block $block) :void
+	{
+		(new iterator\fifo)
+			->variablesForIteratorBlockAre(
+				new iterator\block\functor(
+					function($iterator, $test) use ($block)
+					{
+						$test
+							->blockForTrueTestIs(
+								new php\block\container\fifo(
+									new block\iterator\breaker($iterator),
+									$block
+								)
+							)
+						;
+					}
+				),
+				... $this->tests
 			)
 		;
 	}

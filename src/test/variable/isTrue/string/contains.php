@@ -1,14 +1,14 @@
 <?php namespace eastoriented\php\test\variable\isTrue\string;
 
+use eastoriented\php\block;
 use eastoriented\php\test\{
 	variable,
 	recipient,
-	variable\isTrue\strictly as isTrue,
-	recipient\ifTrue\functor as ifTrue
+	variable\isNotFalse\strictly as isNotFalse
 };
 use eastoriented\php\container\iterator\{
 	fifo,
-	block\functor as block
+	block\functor
 };
 
 class contains
@@ -16,24 +16,26 @@ class contains
 		variable
 {
 	private
-		$boolean
+		$boolean = false
 	;
 
 	function __construct(string $haystack, string... $needles)
 	{
 		(new fifo)
 			->variablesForIteratorBlockAre(
-				new block(
+				new functor(
 					function($iterator, $needle) use ($haystack)
 					{
 						(
-							new isTrue($this->boolean = strpos($haystack, $needle) !== false)
+							new isNotFalse(strpos($haystack, $needle))
 						)
-							->recipientOfTestIs(
-								new ifTrue(
+							->blockForTrueTestIs(
+								new block\functor(
 									function() use ($iterator)
 									{
 										$iterator->nextIterationAreUseless();
+
+										$this->boolean = true;
 									}
 								)
 							)
@@ -48,5 +50,16 @@ class contains
 	function recipientOfTestIs(recipient $recipient) :void
 	{
 		$recipient->booleanIs($this->boolean);
+	}
+
+	function blockForTrueTestIs(block $block) :void
+	{
+		(
+			new isNotFalse($this->boolean)
+		)
+			->blockForTrueTestIs(
+				$block
+			)
+		;
 	}
 }
