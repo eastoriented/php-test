@@ -16,7 +16,7 @@ class any extends units\test
 		;
 	}
 
-	function testIteratorBlockIs()
+	function testIteratorBlockForTestIs()
 	{
 		$this
 			->given(
@@ -25,17 +25,35 @@ class any extends units\test
 					$test = new mockOfTest\variable,
 					$otherTest = new mockOfTest\variable
 				),
-				$block = new mockOfIterator\block
+				$block = new mockOfIterator\block\test
 			)
 			->if(
-				$this->testedInstance->iteratorBlockIs($block)
+				$this->testedInstance->iteratorBlockForTestIs($block)
 			)
 			->then
 				->object($this->testedInstance)
 					->isEqualTo($this->newTestedInstance($iterator, $test, $otherTest))
-				->mock($iterator)
-					->receive('variablesForIteratorBlockAre')
-						->withArguments($block, $test, $otherTest)
+				->mock($block)
+					->receive('iteratorHasTest')
+						->never
+
+			->given(
+				$this->calling($iterator)->variablesForIteratorBlockAre = function($aBlock, ... $someVariable) use ($iterator) {
+					$aBlock->blockArgumentsAre($iterator, $someVariable[0]);
+					$aBlock->blockArgumentsAre($iterator, $someVariable[1]);
+				}
+			)
+			->if(
+				$this->testedInstance->iteratorBlockForTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance($iterator, $test, $otherTest))
+				->mock($block)
+					->receive('iteratorHasTest')
+						->withArguments($iterator, $test)
+							->once
+						->withArguments($iterator, $otherTest)
 							->once
 		;
 	}

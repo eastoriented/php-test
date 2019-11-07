@@ -45,7 +45,21 @@ class any
 		;
 	}
 
-	function iteratorBlockIs(iterator\block $block) :void
+	function iteratorBlockForTestIs(iterator\block\test $block) :void
+	{
+		$this
+			->iteratorBlockIs(
+				new iterator\block\functor(
+					function ($iterator, $test) use ($block)
+					{
+						$block->iteratorHasTest($iterator, $test);
+					}
+				)
+			)
+		;
+	}
+
+	private function iteratorBlockIs(block $block) :void
 	{
 		$this->iterator
 			->variablesForIteratorBlockAre(

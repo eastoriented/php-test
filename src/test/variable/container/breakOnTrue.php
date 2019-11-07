@@ -7,15 +7,15 @@ class breakOnTrue extends any
 	function recipientOfTestIs(test\recipient $recipient) :void
 	{
 		$this
-			->iteratorBlockIs(
-				new iterator\block\functor(
+			->iteratorBlockForTestIs(
+				new iterator\block\test\functor(
 					function($iterator, $test) use ($recipient)
 					{
 						$test
 							->recipientOfTestIs(
-								new test\recipient\container\fifo(
-									$recipient,
-									new test\recipient\ifTrue\iterator\breaker($iterator)
+								new test\recipient\container\fifo\ifTrue\iterator\breaker(
+									$iterator,
+									$recipient
 								)
 							)
 						;
@@ -23,9 +23,5 @@ class breakOnTrue extends any
 				)
 			)
 		;
-	}
-
-	function blockForTrueTestIs(block $block) :void
-	{
 	}
 }

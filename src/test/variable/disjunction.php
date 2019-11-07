@@ -4,11 +4,10 @@ use eastoriented\php\block;
 use eastoriented\php\test\{
 	variable as test,
 	recipient,
-	variable\defined,
-	variable\isTrue\strictly as isTrue,
+	variable\isBoolean\strictly as isBoolean,
 	recipient\ifTrue\functor as ifTrue
 };
-use eastoriented\php\container\{ iterator, php };
+use eastoriented\php\container\{ iterator, php, iterator\block\test\ifTrue\iterator\breaker };
 
 class disjunction
 	implements
@@ -26,38 +25,22 @@ class disjunction
 	function recipientOfTestIs(recipient $recipient) :void
 	{
 		(
-			new test\container\any(
-				new iterator\fifo,
+			new test\container\fifo(
 				... $this->tests
 			)
 		)
-			->iteratorBlockIs(
-				new iterator\block\functor(
-					function($iterator, $test) use (& $boolean)
-					{
-						$test
-							->recipientOfTestIs(
-								new recipient\container\fifo(
-									new recipient\variable($boolean),
-									new recipient\ifTrue\iterator\breaker($iterator)
-								)
-							)
-						;
-					}
+			->iteratorBlockForTestIs(
+				new breaker(
+					new recipient\variable($boolean)
 				)
 			)
 		;
 
 		(
-			new defined($boolean)
+			new isBoolean\forwarder($boolean)
 		)
-			->blockForTrueTestIs(
-				new block\functor(
-					function() use ($boolean, $recipient)
-					{
-						$recipient->booleanIs($boolean);
-					}
-				)
+			->recipientOfTestIs(
+				$recipient
 			)
 		;
 	}
