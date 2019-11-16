@@ -22,9 +22,7 @@ class forwarder
 
 	function recipientOfTestIs(recipient $recipient) :void
 	{
-		(
-			new isBoolean\strictly($this->variable)
-		)
+		$this
 			->blockForTrueTestIs(
 				new block\functor(
 					function() use ($recipient)
@@ -38,5 +36,17 @@ class forwarder
 
 	function blockForTrueTestIs(block $block) :void
 	{
+		(
+			new isBoolean\strictly($this->variable)
+		)
+			->blockForTrueTestIs(
+				new block\functor(
+					function() use ($block)
+					{
+						$block->blockArgumentsAre($this->variable);
+					}
+				)
+			)
+		;
 	}
 }

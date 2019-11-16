@@ -4,6 +4,7 @@ require __DIR__ . '/../../../../../runner.php';
 
 use eastoriented\tests\units;
 use mock\eastoriented\php\test\recipient as mockOfRecipient;
+use mock\eastoriented\php\block as mockOfBlock;
 
 class forwarder extends units\test
 {
@@ -53,6 +54,26 @@ class forwarder extends units\test
 						->once
 							->withArguments(false)
 								->once
+		;
+	}
+
+	function testBlockForTrueTestIs()
+	{
+		$this
+			->given(
+				$this->newTestedInstance(false),
+				$block = new mockOfBlock
+			)
+			->if(
+				$this->testedInstance->blockForTrueTestIs($block)
+			)
+			->then
+				->object($this->testedInstance)
+					->isEqualTo($this->newTestedInstance(false))
+				->mock($block)
+					->receive('blockArgumentsAre')
+						->withArguments(false)
+							->once
 		;
 	}
 
