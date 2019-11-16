@@ -1,6 +1,6 @@
 <?php namespace eastoriented\php\test\variable\container;
 
-use eastoriented\php\{ test, container\iterator, block };
+use eastoriented\php\{ test, container\iterator };
 
 class breakOnTrue extends any
 {
@@ -8,18 +8,8 @@ class breakOnTrue extends any
 	{
 		$this
 			->iteratorBlockForTestIs(
-				new iterator\block\test\functor(
-					function($iterator, $test) use ($recipient)
-					{
-						$test
-							->recipientOfTestIs(
-								new test\recipient\container\fifo\ifTrue\iterator\breaker(
-									$iterator,
-									$recipient
-								)
-							)
-						;
-					}
+				new iterator\block\test\ifTrue\iterator\breaker(
+					$recipient
 				)
 			)
 		;

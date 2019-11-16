@@ -5,7 +5,6 @@ require __DIR__ . '/../../../../runner.php';
 use eastoriented\tests\units;
 use eastoriented\php\container\iterator;
 use mock\eastoriented\php\test as mockOfTest;
-use mock\eastoriented\php\block as mockOfBlock;
 use mock\eastoriented\php\container\iterator as mockOfIterator;
 
 class breakOnTrue extends units\test
