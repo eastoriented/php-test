@@ -1,4 +1,4 @@
-# eastoriented/php-test
+# eastoriented/php-test [![Build Status](https://travis-ci.org/eastoriented/php-test.svg?branch=master)](https://travis-ci.org/eastoriented/php-test) [![Coverage Status](https://coveralls.io/repos/github/eastoriented/php-test/badge.svg?branch=master)](https://coveralls.io/github/eastoriented/php-test?branch=master)
 
 `eastoriented/php-test` is a east oriented PHP library to do some test using object instead of `if` instruction.
 All public methods in all classes return `void`.
