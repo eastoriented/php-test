@@ -4,6 +4,7 @@ use eastoriented\php\block;
 use eastoriented\php\test\{
 	variable,
 	recipient,
+	aString,
 	variable\isNotFalse\strictly as isNotFalse
 };
 use eastoriented\php\container\iterator\{
@@ -52,9 +53,10 @@ class contains
 					function($iterator, $needle) use (& $boolean)
 					{
 						(
-							new isNotFalse(strpos($this->haystack, $needle))
+							new aString\contains($needle)
 						)
-							->blockForTrueTestIs(
+							->blockForTrueTestOnStringIs(
+								$this->haystack,
 								new block\functor(
 									function() use ($iterator, & $boolean)
 									{
